@@ -1,0 +1,1 @@
+curl -v -X POST --basic -u JD0c1ZdGgIWfNUrnJDQowO7jyP8a:zIomRKZZ6KpNo7RnZC9V4M85Zz8a -H "Content-Type: application/x-www-form-urlencoded;charset=UTF-8" -k -d "grant_type=password&username=admin&password=admin&scope=place-order"  https://localhost:9443/oauth2/token
