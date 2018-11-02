@@ -37,7 +37,6 @@ endpoint http:SecureListener ep {
     }
 }
 service<http:Service> echo bind ep {
-
     @http:ResourceConfig {
         methods: ["POST"],
         path: "/items",
