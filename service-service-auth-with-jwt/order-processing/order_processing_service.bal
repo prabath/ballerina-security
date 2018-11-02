@@ -50,7 +50,6 @@ endpoint http:SecureListener ep {
     }
 }
 service<http:Service> echo bind ep {
-
     @http:ResourceConfig {
         methods: ["POST"],
         path: "/orders",
@@ -58,9 +57,7 @@ service<http:Service> echo bind ep {
             scopes: ["place-order"]
         }
     }
-
     placeOrder(endpoint caller, http:Request req) {
-
         setToken(req);
         http:Request invReq = new;
         json invPayload = {"items" :[{"code" : "10001","qty" : 4}]};
