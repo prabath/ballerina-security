@@ -14,31 +14,13 @@ http:AuthProvider jwtAuthProvider = {
     }
 };
 
-endpoint http:Client httpEndpoint {
-    url: "https://localhost:9009",
+endpoint http:Client opa {
+    url: "http://localhost:8181",
      secureSocket: {
         trustStore: {
             path: "order-processing/keys/truststore.p12",
             password: "wso2carbon"
         }
-    },
-    auth: {
-        scheme: http:JWT_AUTH
-    }
-};
-
-endpoint http:Client tokenEndpoint {
-    url: "https://localhost:9443/oauth2",
-     secureSocket: {
-        trustStore: {
-            path: "order-processing/keys/truststore.p12",
-            password: "wso2carbon"
-        }
-    },
-    auth: {
-        scheme: http:BASIC_AUTH,
-        username: "FlfJYKBD2c925h4lkycqNZlC2l4a",
-        password: "gWGWUmlBF35cIahquMfIlIsujlwa"
     }
 };
 
@@ -73,14 +55,14 @@ service<http:Service> orderprocessing bind ep {
         }
     }
     placeOrder(endpoint caller, http:Request req) {
-        exchangeToken(runtime:getInvocationContext().authContext.authToken);
-        http:Request invReq = new;
-        json invPayload = {"items" :[{"code" : "10001","qty" : 4}]};
-        invReq.setJsonPayload(invPayload, contentType = "application/json");
-        var response = httpEndpoint->post("/inventory/items",invReq);
+        setJWT(runtime:getInvocationContext().authContext.authToken);
+        http:Request opaReq = new;
+        json opaPayload = { "input" : { "method" : "GET", "path" : ["finance","salary"],"user": "bob2" }};
+        opaReq.setJsonPayload(opaPayload, contentType = "application/json");
+        var response = opa->post("/v1/data/authz/allow",opaReq);
         match response {
             http:Response resp => { 
-                string log = "response from inventory service " + check resp.getPayloadAsString();
+                string log = "response from opa " + check resp.getPayloadAsString();
                 log:printInfo(log);
                 json success = {"status" : "order created successfully"};
                 http:Response res = new;
@@ -99,22 +81,16 @@ service<http:Service> orderprocessing bind ep {
     }
 }
 
-function exchangeToken(string jwt) {
+//function setToken(http:Request req) {
+//    string authHeader = req.getHeader("Authorization");
+//    runtime:getInvocationContext().authContext.scheme = "jwt";
+//    runtime:getInvocationContext().authContext.authToken = authHeader.split(" ")[1];
+//} 
 
-    http:Request newReq = new;
-    string payload = "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=update_items&assertion=" + jwt;
-    newReq.setTextPayload(untaint payload, contentType = "application/x-www-form-urlencoded");
-
-    var response = tokenEndpoint->post("/token",newReq);
-        match response {
-            http:Response resp => { 
-                json jsonResp =  check resp.getJsonPayload();
-                json  newJWT =  jsonResp.access_token;
-                runtime:getInvocationContext().authContext.scheme = "jwt";
-                runtime:getInvocationContext().authContext.authToken = newJWT.toString();
-            }
-            error err => { 
-                log:printError("call to the token endpoint failed during token exchange.");
-            }
-    }        
+function setJWT(string jwt) {
+    runtime:getInvocationContext().authContext.scheme = "jwt";
+    runtime:getInvocationContext().authContext.authToken = jwt;
 }
+
+
+

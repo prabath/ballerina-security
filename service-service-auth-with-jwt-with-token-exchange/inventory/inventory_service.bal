@@ -36,7 +36,7 @@ endpoint http:SecureListener ep {
         authentication: { enabled: true }
     }
 }
-service<http:Service> echo bind ep {
+service<http:Service> inventory bind ep {
     @http:ResourceConfig {
         methods: ["POST"],
         path: "/items",
