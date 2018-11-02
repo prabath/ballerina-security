@@ -4,7 +4,7 @@
 
 * Secure by Design Microservices & Integrations, BallerinaCon 2018 by Ayoma Wijethunga : https://www.youtube.com/watch?v=GmIZVwc15bE
 
-* How to Write Secure Ballerina Programs: https://ballerina.io/learn/how-to-write-secure-ballerina-code/
+* How to Write Secure Ballerina Programs : https://ballerina.io/learn/how-to-write-secure-ballerina-code/
 
 * Security Aware Programming Language — Why, How and Ballerina! : https://medium.com/@ayoma/security-aware-programming-language-why-how-and-ballerina-fef03eadca42
 
