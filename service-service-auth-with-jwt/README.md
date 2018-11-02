@@ -28,7 +28,7 @@
 ```javascript
 :\> sh 4-get-jwt-from-sts.sh
 ```
-*Now, we need to copy the value of the access_token parameter, from the above response and export it as TOKEN to the shell environment. The value of the TOKEN environment variable is referred by 5-call-order-processing.sh.
+* Now, we need to copy the value of the access_token parameter, from the above response and export it as TOKEN to the shell environment. The value of the TOKEN environment variable is referred by 5-call-order-processing.sh.
 
 ```javascript
 :\> export TOKEN=
