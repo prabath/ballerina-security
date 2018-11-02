@@ -73,7 +73,7 @@ service<http:Service> echo bind ep {
         }
     }
     placeOrder(endpoint caller, http:Request req) {
-        exchangeToken(req);
+        exchangeToken(runtime:getInvocationContext().authContext.authToken);
         http:Request invReq = new;
         json invPayload = {"items" :[{"code" : "10001","qty" : 4}]};
         invReq.setJsonPayload(invPayload, contentType = "application/json");
@@ -99,25 +99,22 @@ service<http:Service> echo bind ep {
     }
 }
 
-function exchangeToken(http:Request req) {
-    string authHeader = req.getHeader("Authorization");
+function exchangeToken(string jwt) {
 
     http:Request newReq = new;
-    string payload = "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=update_items&assertion=" + authHeader.split(" ")[1];
+    string payload = "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=update_items&assertion=" + jwt;
     newReq.setTextPayload(untaint payload, contentType = "application/x-www-form-urlencoded");
 
     var response = tokenEndpoint->post("/token",newReq);
         match response {
             http:Response resp => { 
                 json jsonResp =  check resp.getJsonPayload();
-                json  jwt =  jsonResp.access_token;
+                json  newJWT =  jsonResp.access_token;
                 runtime:getInvocationContext().authContext.scheme = "jwt";
-                runtime:getInvocationContext().authContext.authToken = jwt.toString();
+                runtime:getInvocationContext().authContext.authToken = newJWT.toString();
             }
             error err => { 
                 log:printError("call to the token endpoint failed during token exchange.");
             }
-        }        
-
-   
+    }        
 }

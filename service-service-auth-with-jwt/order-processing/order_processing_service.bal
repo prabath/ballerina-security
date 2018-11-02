@@ -58,7 +58,7 @@ service<http:Service> echo bind ep {
         }
     }
     placeOrder(endpoint caller, http:Request req) {
-        setToken(req);
+        setJWT(runtime:getInvocationContext().authContext.authToken);
         http:Request invReq = new;
         json invPayload = {"items" :[{"code" : "10001","qty" : 4}]};
         invReq.setJsonPayload(invPayload, contentType = "application/json");
@@ -84,8 +84,16 @@ service<http:Service> echo bind ep {
     }
 }
 
-function setToken(http:Request req) {
-    string authHeader = req.getHeader("Authorization");
+//function setToken(http:Request req) {
+//    string authHeader = req.getHeader("Authorization");
+//    runtime:getInvocationContext().authContext.scheme = "jwt";
+//    runtime:getInvocationContext().authContext.authToken = authHeader.split(" ")[1];
+//} 
+
+function setJWT(string jwt) {
     runtime:getInvocationContext().authContext.scheme = "jwt";
-    runtime:getInvocationContext().authContext.authToken = authHeader.split(" ")[1];
+    runtime:getInvocationContext().authContext.authToken = jwt;
 }
+
+
+
