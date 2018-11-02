@@ -1,4 +1,4 @@
-## Securing Service to Service Communication Over TLS with JWT
+## Securing service to service communication over TLS with JWT
 
 ![alt text](./setup.png "Service to Service Communication Over TLS with JWT")
 
