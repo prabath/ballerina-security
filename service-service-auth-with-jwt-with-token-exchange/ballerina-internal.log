@@ -1,0 +1,19 @@
+[2018-11-02 01:41:45,995] ERROR {org.ballerinalang.stdlib.internal.jwt.signature.VerifySignature} - Illegal base64 character 2c 
+java.lang.IllegalArgumentException: Illegal base64 character 2c
+	at java.util.Base64$Decoder.decode0(Base64.java:714)
+	at java.util.Base64$Decoder.decode(Base64.java:526)
+	at org.ballerinalang.stdlib.internal.jwt.crypto.RSAVerifier.verify(RSAVerifier.java:53)
+	at org.ballerinalang.stdlib.internal.jwt.signature.VerifySignature.execute(VerifySignature.java:76)
+	at org.ballerinalang.bre.bvm.BlockingNativeCallableUnit.execute(BlockingNativeCallableUnit.java:35)
+	at org.ballerinalang.util.program.BLangFunctions.invokeNativeCallable(BLangFunctions.java:393)
+	at org.ballerinalang.util.program.BLangFunctions.invokeCallable(BLangFunctions.java:264)
+	at org.ballerinalang.bre.bvm.CPU.tryExec(CPU.java:408)
+	at org.ballerinalang.bre.bvm.CPU.exec(CPU.java:159)
+	at org.ballerinalang.bre.bvm.BLangScheduler$WorkerExecutor.run(BLangScheduler.java:284)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+ 
+[2018-11-02 01:41:46,008] ERROR {org.ballerinalang.net.http.HttpUtil} - call failed  

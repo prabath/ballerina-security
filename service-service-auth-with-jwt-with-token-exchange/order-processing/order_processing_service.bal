@@ -27,6 +27,21 @@ endpoint http:Client httpEndpoint {
     }
 };
 
+endpoint http:Client tokenEndpoint {
+    url: "https://localhost:9443/oauth2",
+     secureSocket: {
+        trustStore: {
+            path: "order-processing/keys/truststore.p12",
+            password: "wso2carbon"
+        }
+    },
+    auth: {
+        scheme: http:BASIC_AUTH,
+        username: "FlfJYKBD2c925h4lkycqNZlC2l4a",
+        password: "gWGWUmlBF35cIahquMfIlIsujlwa"
+    }
+};
+
 endpoint http:SecureListener ep {
     port: 9008,
     authProviders:[jwtAuthProvider],
@@ -58,7 +73,7 @@ service<http:Service> echo bind ep {
         }
     }
     placeOrder(endpoint caller, http:Request req) {
-        setToken(req);
+        exchangeToken(req);
         http:Request invReq = new;
         json invPayload = {"items" :[{"code" : "10001","qty" : 4}]};
         invReq.setJsonPayload(invPayload, contentType = "application/json");
@@ -84,8 +99,25 @@ service<http:Service> echo bind ep {
     }
 }
 
-function setToken(http:Request req) {
+function exchangeToken(http:Request req) {
     string authHeader = req.getHeader("Authorization");
-    runtime:getInvocationContext().authContext.scheme = "jwt";
-    runtime:getInvocationContext().authContext.authToken = authHeader.split(" ")[1];
+
+    http:Request newReq = new;
+    string payload = "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=update_items&assertion=" + authHeader.split(" ")[1];
+    newReq.setTextPayload(untaint payload, contentType = "application/x-www-form-urlencoded");
+
+    var response = tokenEndpoint->post("/token",newReq);
+        match response {
+            http:Response resp => { 
+                json jsonResp =  check resp.getJsonPayload();
+                json  jwt =  jsonResp.access_token;
+                runtime:getInvocationContext().authContext.scheme = "jwt";
+                runtime:getInvocationContext().authContext.authToken = jwt.toString();
+            }
+            error err => { 
+                log:printError("call to the token endpoint failed during token exchange.");
+            }
+        }        
+
+   
 }

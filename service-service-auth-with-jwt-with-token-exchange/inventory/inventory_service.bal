@@ -6,7 +6,7 @@ import ballerina/io;
 http:AuthProvider jwtAuthProvider = {
     scheme:"jwt",
     issuer:"wso2is",
-    audience: "3VTwFk7u1i366wzmvpJ_LZlfAV4a",
+    audience: "FlfJYKBD2c925h4lkycqNZlC2l4a",
     certificateAlias:"wso2carbon",
     trustStore: {
         path: "inventory/keys/truststore.p12",
@@ -41,7 +41,7 @@ service<http:Service> echo bind ep {
         methods: ["POST"],
         path: "/items",
         authConfig: {
-            scopes: ["place-order"]
+            scopes: ["update_items"]
         }
     }
     updateItems(endpoint caller, http:Request req) {
