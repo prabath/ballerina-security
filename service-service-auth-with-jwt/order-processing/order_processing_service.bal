@@ -65,7 +65,7 @@ service<http:Service> echo bind ep {
         var response = httpEndpoint->post("/inventory/items",invReq);
         match response {
             http:Response resp => { 
-                string log = "response from inventory service" + check resp.getPayloadAsString();
+                string log = "response from inventory service " + check resp.getPayloadAsString();
                 log:printInfo(log);
                 json success = {"status" : "order created successfully"};
                 http:Response res = new;
