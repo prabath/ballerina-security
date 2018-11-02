@@ -6,6 +6,9 @@
 
 * How to Write Secure Ballerina Programs: https://ballerina.io/learn/how-to-write-secure-ballerina-code/
 
+* Security Aware Programming Language — Why, How and Ballerina! : https://medium.com/@ayoma/security-aware-programming-language-why-how-and-ballerina-fef03eadca42
+
+
 ## Microservices Security Resources
 
 * Microservices Security Landscape, Identiverse 2018 by Prabath Siriwardena : https://www.youtube.com/watch?v=LNihgqvOqOk
