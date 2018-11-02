@@ -2,7 +2,7 @@
 
 ![alt text](./setup.png "Service to Service Communication Over TLS with JWT")
 
-* **Step:0** Clone the git repo with the following command. If you are new to Ballerina, please check this out: https://ballerina.io/.
+* **Step:0** Clone the git repo with the following command. If you are new to Ballerina, please check this out: https://ballerina.io/.cp 
 
 ```javascript
 :\> git clone https://github.com/prabath/ballerina-security.git
@@ -36,7 +36,7 @@
 ```
 * If you want to decode and see what is in the above JWT, go to https://jwt.io/ and paste the value of the TOKEN (or the JWT) there.
 
-* **Step:5** Run the following command from the directory **service-service-auth-with-jwt** to invoke rge Order Processing microservice. Make sure to run this command from the same terminal you export the value of the JWT to TOKEN environment variable.
+* **Step:5** Run the following command from the directory **service-service-auth-with-jwt** to invoke rge Order Processing microservice. **Make sure to run this command from the same terminal you exported the value of the JWT to TOKEN environment variable**.
 
 ```javascript
 :\> sh 5-call-order-processing.sh
