@@ -35,6 +35,14 @@
 
 * Introduction to Container Security : https://www.youtube.com/watch?v=15bsTualHnA
 
+## Projected Related to Microservices Security
+
+* Open Policy Agent (OPA) : https://www.openpolicyagent.org/
+
+* SPIFFE : https://spiffe.io/
+
+* Kubernetes Policy Controller with OPA : https://github.com/Azure/kubernetes-policy-controller
+
 
 
 
