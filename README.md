@@ -37,6 +37,8 @@
 
 * Running with Scissors, KubeCon 2018 : https://www.youtube.com/watch?v=ltrV-Qmh3oY
 
+* Security Namespace: Making Linux Security Frameworks Available to Containers : https://www.usenix.org/system/files/conference/usenixsecurity18/sec18-sun.pdf
+
 ## Projected Related to Microservices Security
 
 * Open Policy Agent (OPA) : https://www.openpolicyagent.org/
