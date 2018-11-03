@@ -33,6 +33,8 @@
 
 * Containers: The Dr. Jekyll and Mr. Hyde of Security, RSAConference 2007 : https://www.youtube.com/watch?v=_5uZnM1yv0Y
 
+* Introduction to Container Security : https://www.youtube.com/watch?v=15bsTualHnA
+
 
 
 
