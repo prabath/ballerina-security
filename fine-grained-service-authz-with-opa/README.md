@@ -42,4 +42,4 @@
 ```
 * **Step:6** Step-6 in the above diagram happens before the step-5 produces the response. There the Order Processing microservice talks to the OPA server to check whether the user from the provided JWT is elgible to do a POST to the orders resource.
 
-* **TODO** At the moment the call to OPA server is done at the service level. This has to be moved to a reusable interceptor.
+* **TODO** At the moment the call to the OPA server is done at the service level. This has to be moved to a reusable interceptor.
