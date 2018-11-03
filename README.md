@@ -31,6 +31,8 @@
 
 * From Kubelet to Istio: Kubernetes Network Security Demystified, KubeCon 2018 : https://www.youtube.com/watch?v=Uocf67aD5QQ
 
+* Containers: The Dr. Jekyll and Mr. Hyde of Security, RSAConference 2007 : https://www.youtube.com/watch?v=_5uZnM1yv0Y
+
 
 
 
