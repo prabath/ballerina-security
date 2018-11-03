@@ -25,7 +25,7 @@
 
 * SPIFFE Project Intro, KubeCon 2018 : https://www.youtube.com/watch?v=0LSaNrOabH4
 
-* SPIFFE Deep Dive, KubeCon 2018 : https://www.youtube.com/watch?v=sXwFB34BBrM
+* SPIFFE Deep Dive, KubeCon 2018 : https://www.youtube.com/watch?v=ltrV-Qmh3oY https://www.youtube.com/watch?v=sXwFB34BBrM
 
 * Istio Security : https://istio.io/docs/concepts/security/
 
@@ -34,6 +34,8 @@
 * Containers: The Dr. Jekyll and Mr. Hyde of Security, RSAConference 2007 : https://www.youtube.com/watch?v=_5uZnM1yv0Y
 
 * Introduction to Container Security : https://www.youtube.com/watch?v=15bsTualHnA
+
+* Running with Scissors, KubeCon 2018 : https://www.youtube.com/watch?v=ltrV-Qmh3oY
 
 ## Projected Related to Microservices Security
 
