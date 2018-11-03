@@ -16,7 +16,7 @@
 * **Step:2** To start OPA server as a Docker container, run the following command from the directory **fine-grained-service-authz-with-opa**. This will spin up the OPA server HTTP port 8181. The policy server is initialized with the policy **fine-grained-service-authz-with-opa/opa/orderprocessing.rego**.
 
 ```javascript
-:\> sh 1-run-opa.sh
+:\> sh 2-run-opa.sh
 ```
 * **Step:3** To start the Order Processing microservice, run the following command from the directory **fine-grained-service-authz-with-opa**. This will start the service on HTTPS port 9008.
 
