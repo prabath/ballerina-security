@@ -17,3 +17,21 @@
 
 * Securing Microservices : https://medium.facilelogin.com/securing-microservices-with-oauth-2-0-jwt-and-xacml-d03770a9a838
 
+* OPA: The Cloud Native Policy Engine, KubeCon 2018 : https://www.youtube.com/watch?v=XEHeexPpgrA
+
+* Open Policy Agent Deep Dive, KubeCon 2018 : https://www.youtube.com/watch?v=4mBJSIhs2xQ
+
+* Entitlements: Understandable Container Security Controls, KubeCon 2018 : https://www.youtube.com/watch?v=Jbqxsli2tRw
+
+* SPIFFE Project Intro, KubeCon 2018 : https://www.youtube.com/watch?v=0LSaNrOabH4
+
+* SPIFFE Deep Dive, KubeCon 2018 : https://www.youtube.com/watch?v=sXwFB34BBrM
+
+* Istio Security : https://istio.io/docs/concepts/security/
+
+* From Kubelet to Istio: Kubernetes Network Security Demystified, KubeCon 2018 : https://www.youtube.com/watch?v=Uocf67aD5QQ
+
+
+
+
+
