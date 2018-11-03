@@ -47,49 +47,51 @@ endpoint http:SecureListener ep {
     }
 }
 service<http:Service> orderprocessing bind ep {
-    @http:ResourceConfig {
+      @http:ResourceConfig {
         methods: ["POST"],
-        path: "/orders",
-        authConfig: {
-            scopes: ["place-order"]
-        }
+        path: "/orders"
     }
     placeOrder(endpoint caller, http:Request req) {
-        setJWT(runtime:getInvocationContext().authContext.authToken);
-        http:Request opaReq = new;
-        json opaPayload = { "input" : { "method" : "GET", "path" : ["finance","salary"],"user": "bob2" }};
-        opaReq.setJsonPayload(opaPayload, contentType = "application/json");
-        var response = opa->post("/v1/data/authz/allow",opaReq);
-        match response {
-            http:Response resp => { 
-                string log = "response from opa " + check resp.getPayloadAsString();
-                log:printInfo(log);
-                json success = {"status" : "order created successfully"};
-                http:Response res = new;
-                res.setPayload(success);
-                _ = caller->respond(res);
-            }
-            error err => { 
-                log:printError("call to the inventory endpoint failed.");
-                json failure = {"status" : "failed to create a new order"};
-                http:Response res = new;
-                res.setPayload(failure);
-                res.statusCode = 500;
-                _ = caller->respond(res);
-            }
-        }        
+        boolean isAuthorized = authz(runtime:getInvocationContext().userPrincipal.username, "orders", "POST");
+        json message;
+        http:Response res = new;
+        if (isAuthorized){
+            message = {"status" : "order created successfully"};
+        } else {
+            message = {"status" : "user not authorized"};
+            res.statusCode = 401;
+        }
+        
+        res.setPayload(message);
+        _ = caller->respond(res);
     }
 }
 
-//function setToken(http:Request req) {
-//    string authHeader = req.getHeader("Authorization");
-//    runtime:getInvocationContext().authContext.scheme = "jwt";
-//    runtime:getInvocationContext().authContext.authToken = authHeader.split(" ")[1];
-//} 
+function authz(string user, string res, string action) returns (boolean) {
+        http:Request opaReq = new;
+        json authzReq = { "input" : {"method": action,"path": res,"user": user}};
 
-function setJWT(string jwt) {
-    runtime:getInvocationContext().authContext.scheme = "jwt";
-    runtime:getInvocationContext().authContext.authToken = jwt;
+        log:printInfo(authzReq.toString());
+
+        opaReq.setJsonPayload(authzReq, contentType = "application/json");
+        var response = opa->post("/v1/data/authz/orderprocessing",opaReq);
+        match response {
+            http:Response resp => { 
+                json jsonResp =  check resp.getJsonPayload();
+                json  result =  jsonResp.result;
+                json  allow =  result.allow;
+                if (allow != null && allow.toString().equalsIgnoreCase("true")) {
+                    return true;
+                } else {
+                    log:printError(jsonResp.toString());
+                    return false;
+                }
+            }
+            error err => { 
+                log:printError("call to the opa endpoint failed.");
+                return false;
+            }
+        } 
 }
 
 
