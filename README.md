@@ -57,6 +57,8 @@
 
 * Ballerina: How it all started : https://www.youtube.com/watch?v=mpuXPC8YS1s
 
+* Ballerina and London Olympics : https://www.youtube.com/watch?v=P92y5cgEa0Q
+
 * Ballerina Compiler — Design : https://medium.com/@sameerajayasoma/ballerina-compiler-design-3406acc2476c
 
 * Ballerina Runtime — Evolution : https://medium.com/@sameerajayasoma/ballerina-runtime-evolution-f82305e4ab8e
