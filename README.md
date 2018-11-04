@@ -51,6 +51,11 @@
 
 * Kubernetes Policy Controller with OPA : https://github.com/Azure/kubernetes-policy-controller
 
+## Ballerina Resources
+
+* Launching Ballerina at the WSO2Con US 2017 by Dr. Sanjiva Weerawarana and Sameera Jayasoma : https://www.youtube.com/watch?v=q6dlGFV86Is
+
+
 
 
 
