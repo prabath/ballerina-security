@@ -55,6 +55,14 @@
 
 * Launching Ballerina at the WSO2Con US 2017 by Dr. Sanjiva Weerawarana and Sameera Jayasoma : https://www.youtube.com/watch?v=q6dlGFV86Is
 
+* Ballerina Compiler — Design : https://medium.com/@sameerajayasoma/ballerina-compiler-design-3406acc2476c
+
+* Ballerina Runtime — Evolution : https://medium.com/@sameerajayasoma/ballerina-runtime-evolution-f82305e4ab8e
+
+* Ballerina is not Java, BallerinaCon 2018 : https://www.youtube.com/watch?v=DusyY-oH-JM
+
+
+
 
 
 
