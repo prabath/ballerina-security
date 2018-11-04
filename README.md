@@ -41,6 +41,8 @@
 
 * Introduction to Container Security : https://www.docker.com/sites/default/files/WP_IntrotoContainerSecurity_08.19.2016.pdf
 
+* Securing a Kubernetes Cluster : https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/
+
 ## Projected Related to Microservices Security
 
 * Open Policy Agent (OPA) : https://www.openpolicyagent.org/
