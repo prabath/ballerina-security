@@ -61,6 +61,7 @@
 
 * Ballerina is not Java, BallerinaCon 2018 : https://www.youtube.com/watch?v=DusyY-oH-JM
 
+* Ballerina - A new language for the networked world : https://www.youtube.com/watch?v=JtwmHo5Ivwg
 
 
 
