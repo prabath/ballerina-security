@@ -43,6 +43,8 @@
 
 * Securing a Kubernetes Cluster : https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/
 
+* Security in Plan 9 : https://www.usenix.org/legacy/event/sec02/cox/cox.pdf
+
 ## Projected Related to Microservices Security
 
 * Open Policy Agent (OPA) : https://www.openpolicyagent.org/
