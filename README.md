@@ -39,6 +39,8 @@
 
 * Security Namespace: Making Linux Security Frameworks Available to Containers : https://www.usenix.org/system/files/conference/usenixsecurity18/sec18-sun.pdf
 
+* Introduction to Container Security : https://www.docker.com/sites/default/files/WP_IntrotoContainerSecurity_08.19.2016.pdf
+
 ## Projected Related to Microservices Security
 
 * Open Policy Agent (OPA) : https://www.openpolicyagent.org/
