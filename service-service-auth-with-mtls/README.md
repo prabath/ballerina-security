@@ -1,4 +1,4 @@
-## Securing service to service communication with mTLS and pass end-user info in a custom HTTP header
+## Securing service to service communication with mTLS and pass end-user context in a custom HTTP header
 
 ![alt text](./setup.png "Service to Service Communication Secured with mTLS")
 
