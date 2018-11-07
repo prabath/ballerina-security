@@ -57,6 +57,8 @@
 
 * Some thoughts on security after ten years of qmail 1.0 : https://cr.yp.to/qmail/qmailsec-20071101.pdf
 
+* Taint Analysis : http://web.cs.iastate.edu/~weile/cs513x/2018spring/taintanalysis.pdf
+
 ## Ballerina Resources
 
 * Launching Ballerina at the WSO2Con US 2017 by Dr. Sanjiva Weerawarana and Sameera Jayasoma : https://www.youtube.com/watch?v=q6dlGFV86Is
