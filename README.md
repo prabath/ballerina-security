@@ -1,4 +1,4 @@
-![alt text](https://images-na.ssl-images-amazon.com/images/I/81hPYZw8m+L._US230_.jpg "Ballerina")
+![alt text](./ballerina.jpg "Ballerina")
 
 ## Ballerina Security Resources
 
