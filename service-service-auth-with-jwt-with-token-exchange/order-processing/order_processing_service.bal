@@ -110,6 +110,7 @@ function exchangeToken(string jwt) {
             http:Response resp => { 
                 json jsonResp =  check resp.getJsonPayload();
                 json  newJWT =  jsonResp.access_token;
+                //log:printInfo(newJWT.toString());
                 runtime:getInvocationContext().authContext.scheme = "jwt";
                 runtime:getInvocationContext().authContext.authToken = newJWT.toString();
             }

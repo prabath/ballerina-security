@@ -70,6 +70,7 @@ service<http:Service> orderprocessing bind ep {
 function authz(string user, string res, string action) returns (boolean) {
         http:Request opaReq = new;
         json authzReq = { "input" : {"method": action,"path": res,"user": user}};
+        //json authzReq = { "input" : {"method": action,"path": res,"user": user, "amount" : 1000}};
 
         log:printInfo(authzReq.toString());
 
