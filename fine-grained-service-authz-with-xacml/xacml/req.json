@@ -1,0 +1,35 @@
+{
+    "Request": {
+        "Category": [
+            {
+            "CategoryId": "http://ecomm.org/authz/resource",
+            "Attribute": ["http://ecomm.org/authz/resource/name"]
+            },
+            {
+            "CategoryId": "http://ecomm.org/authz/action",
+            "Attribute": ["http://ecomm.org/authz/action/name"]
+            }
+        ],
+
+        "Attribute": [
+            {
+                "AttributeId": "http://ecomm.org/authz/resource/name",
+                "Value": "orders"
+            },
+            {
+                "AttributeId": "http://ecomm.org/authz/action/name",
+                "Value": "POST"
+            }
+        ],
+        "AccessSubject": {
+            "Attribute": [
+                {
+                    "AttributeId": "urn:oasis:names:tc:xacml:1.0:subject:subject-id",
+                    "Value": "admin@carbon.super"
+                }
+            ]
+        }
+
+    }
+}
+
