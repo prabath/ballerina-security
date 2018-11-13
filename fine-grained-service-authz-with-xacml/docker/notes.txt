@@ -1,7 +1,9 @@
 docker login
 
 docker build -t wso2is-sts .
-
 docker tag <image-id> prabath/wso2is-sts
-
 docker push prabath/wso2is-sts
+
+docker build -t wso2is-pdp .
+docker tag <image-id> prabath/wso2is-pdp
+docker push prabath/wso2is-pdp

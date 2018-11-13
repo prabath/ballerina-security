@@ -1,6 +1,6 @@
-## Fine-grained access control with Open Policy Agent (OPA)
+## Fine-grained access control with XACML
 
-![alt text](./setup.png "Fine-grained access control with Open Policy Agent (OPA)")
+![alt text](./setup.png "Fine-grained access control with XACML")
 
 * **Step:0** Clone the git repo with the following command. If you are new to Ballerina, please check this out: https://ballerina.io/. Ballerina version: 0.982.0.
 

@@ -6,11 +6,11 @@
          <AllOf>
             <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">orders</AttributeValue>
-               <AttributeDesignator AttributeId="http://ecomm.org/authz/resource/name" Category="http://ecomm.org/authz/resource" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false" />
+               <AttributeDesignator AttributeId="http://ecomm.org/authz/resource/name" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false" />
             </Match>
             <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">POST</AttributeValue>
-               <AttributeDesignator AttributeId="http://ecomm.org/authz/action/name" Category="http://ecomm.org/authz/action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false" />
+               <AttributeDesignator AttributeId="http://ecomm.org/authz/action/name" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false" />
             </Match>
          </AllOf>
       </AnyOf>

@@ -14,13 +14,18 @@ http:AuthProvider jwtAuthProvider = {
     }
 };
 
-endpoint http:Client opa {
-    url: "http://localhost:8181",
+endpoint http:Client pdp {
+    url: "https://localhost:9445",
      secureSocket: {
         trustStore: {
             path: "order-processing/keys/truststore.p12",
             password: "wso2carbon"
         }
+    },
+    auth: {
+        scheme: http:BASIC_AUTH,
+        username: "admin",
+        password: "admin"
     }
 };
 
@@ -68,20 +73,19 @@ service<http:Service> orderprocessing bind ep {
 }
 
 function authz(string user, string res, string action) returns (boolean) {
-        http:Request opaReq = new;
-        json authzReq = { "input" : {"method": action,"path": res,"user": user}};
-        //json authzReq = { "input" : {"method": action,"path": res,"user": user, "amount" : 1000}};
+        http:Request xacmlReq = new;
+        json authzReq = getAuthzRequest(user);
 
         log:printInfo(authzReq.toString());
 
-        opaReq.setJsonPayload(authzReq, contentType = "application/json");
-        var response = opa->post("/v1/data/authz/orderprocessing",opaReq);
+        xacmlReq.setJsonPayload(authzReq, contentType = "application/json");
+        var response = pdp->post("/api/identity/entitlement/decision/pdp",xacmlReq);
         match response {
             http:Response resp => { 
                 json jsonResp =  check resp.getJsonPayload();
-                json  result =  jsonResp.result;
-                json  allow =  result.allow;
-                if (allow != null && allow.toString().equalsIgnoreCase("true")) {
+                json  result =  jsonResp.Response[0];
+                json  allow =  result.Decision;
+                if (allow != null && allow.toString().equalsIgnoreCase("permit")) {
                     return true;
                 } else {
                     log:printError(jsonResp.toString());
@@ -95,5 +99,33 @@ function authz(string user, string res, string action) returns (boolean) {
         } 
 }
 
-
+function getAuthzRequest(string subject) returns (json) {
+    return  { "Request": { 
+                "Action": {
+                    "Attribute": [
+                        {
+                            "AttributeId": "http://ecomm.org/authz/action/name", 
+                            "Value": "POST"
+                        }
+                    ]
+                }, 
+                "Resource": {
+                    "Attribute": [
+                        {
+                            "AttributeId": "http://ecomm.org/authz/resource/name", 
+                            "Value": "orders"
+                        }
+                    ]
+                },
+                "AccessSubject": {
+                    "Attribute": [
+                        {
+                            "AttributeId": "urn:oasis:names:tc:xacml:1.0:subject:subject-id", 
+                            "Value": subject
+                        }
+                    ]
+                }
+                }
+            };
+}
 
