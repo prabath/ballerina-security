@@ -33,7 +33,7 @@
 ```
 * If you want to decode and see what is in the above JWT, go to https://jwt.io/ and paste the value of the TOKEN (or the JWT) there.
 
-* **Step:5** Run the following command from the directory **fine-grained-service-authz-with-opa** to invoke rge Order Processing microservice. **Make sure to run this command from the same terminal you exported the value of the JWT to TOKEN environment variable**.
+* **Step:5** Run the following command from the directory **fine-grained-service-authz-with-opa** to invoke the Order Processing microservice. **Make sure to run this command from the same terminal you exported the value of the JWT to TOKEN environment variable**.
 
 ```javascript
 :\> sh 5-call-order-processing.sh
