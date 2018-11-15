@@ -42,7 +42,7 @@ endpoint http:Client tokenEndpoint {
     }
 };
 
-endpoint http:SecureListener ep {
+endpoint http:Listener ep {
     port: 9008,
     authProviders:[jwtAuthProvider],
 
@@ -110,7 +110,7 @@ function exchangeToken(string jwt) {
             http:Response resp => { 
                 json jsonResp =  check resp.getJsonPayload();
                 json  newJWT =  jsonResp.access_token;
-                //log:printInfo(newJWT.toString());
+                log:printInfo(newJWT.toString());
                 runtime:getInvocationContext().authContext.scheme = "jwt";
                 runtime:getInvocationContext().authContext.authToken = newJWT.toString();
             }

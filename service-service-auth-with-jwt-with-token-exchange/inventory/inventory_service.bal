@@ -14,7 +14,7 @@ http:AuthProvider jwtAuthProvider = {
     }
 };
 
-endpoint http:SecureListener ep {
+endpoint http:Listener ep {
     port: 9009,
     authProviders:[jwtAuthProvider],
 

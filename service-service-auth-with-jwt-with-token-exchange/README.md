@@ -1,7 +1,7 @@
 ## Securing service to service communication over TLS with JWT with token exchange
 ![alt text](./setup.png "Service to Service Communication Over TLS with JWT")
 
-* **Step:0** Clone the git repo with the following command. If you are new to Ballerina, please check this out: https://ballerina.io/. Ballerina version: 0.982.0.
+* **Step:0** Clone the git repo with the following command. If you are new to Ballerina, please check this out: https://ballerina.io/. Ballerina version: 0.983.0.
 
 ```javascript
 :\> git clone https://github.com/prabath/ballerina-security.git

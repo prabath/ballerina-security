@@ -24,7 +24,7 @@ endpoint http:Client opa {
     }
 };
 
-endpoint http:SecureListener ep {
+endpoint http:Listener ep {
     port: 9008,
     authProviders:[jwtAuthProvider],
 

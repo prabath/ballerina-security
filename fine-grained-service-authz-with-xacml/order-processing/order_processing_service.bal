@@ -29,7 +29,7 @@ endpoint http:Client pdp {
     }
 };
 
-endpoint http:SecureListener ep {
+endpoint http:Listener ep {
     port: 9008,
     authProviders:[jwtAuthProvider],
 
@@ -85,6 +85,7 @@ function authz(string user, string res, string action) returns (boolean) {
                 json jsonResp =  check resp.getJsonPayload();
                 json  result =  jsonResp.Response[0];
                 json  allow =  result.Decision;
+                log:printInfo(allow.toString());
                 if (allow != null && allow.toString().equalsIgnoreCase("permit")) {
                     return true;
                 } else {

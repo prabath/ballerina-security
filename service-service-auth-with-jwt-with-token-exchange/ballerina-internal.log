@@ -17,3 +17,4 @@ java.lang.IllegalArgumentException: Illegal base64 character 2c
 	at java.lang.Thread.run(Thread.java:748)
  
 [2018-11-02 01:41:46,008] ERROR {org.ballerinalang.net.http.HttpUtil} - call failed  
+[2018-11-13 11:20:39,087] WARN  {io.netty.util.internal.MacAddressUtil} - Failed to find a usable hardware address from the network interfaces; using random bytes: a3:d5:f6:e2:6b:49:6e:f8  

@@ -33,7 +33,7 @@ endpoint http:Client httpEndpoint {
     }
 };
 
-endpoint http:SecureListener ep {
+endpoint http:Listener ep {
     port: 9008,
     authProviders:[jwtAuthProvider],
 
