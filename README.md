@@ -8,7 +8,7 @@
 
 * Security Aware Programming Language — Why, How and Ballerina! : https://medium.com/@ayoma/security-aware-programming-language-why-how-and-ballerina-fef03eadca42
 
-* Securing #Ballerina #Microservices with #WSO2 #Identity Server, #JWT, #OPA and #XACML : https://www.youtube.com/watch?v=DBhylSRkpRg
+* Securing #Ballerina #Microservices with WSO2 #Identity Server, JWT, OPA and XACML : https://www.youtube.com/watch?v=DBhylSRkpRg
 
 
 ## Microservices Security Resources
