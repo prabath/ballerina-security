@@ -1,103 +1,98 @@
+import ballerina/auth;
 import ballerina/http;
-import ballerina/runtime;
+import ballerina/jwt;
 import ballerina/log;
-import ballerina/io;
+import ballerina/runtime;
+import ballerina/stringutils;
 
-http:AuthProvider jwtAuthProvider = {
-    scheme:"jwt",
-    issuer:"wso2is",
+jwt:InboundJwtAuthProvider inboundJwtAuthProvider = new({
+    issuer: "wso2is",
     audience: "3VTwFk7u1i366wzmvpJ_LZlfAV4a",
-    certificateAlias:"wso2carbon",
-    trustStore: {
-        path: "order-processing/keys/truststore.p12",
-        password: "wso2carbon"
-    }
-};
-
-endpoint http:Client pdp {
-    url: "https://localhost:9445",
-     secureSocket: {
+    trustStoreConfig: {
+        certificateAlias: "wso2carbon",
         trustStore: {
-            path: "order-processing/keys/truststore.p12",
+            path: "src/order-processing/keys/truststore.p12",
             password: "wso2carbon"
         }
-    },
-    auth: {
-        scheme: http:BASIC_AUTH,
-        username: "admin",
-        password: "admin"
     }
-};
+});
+http:BearerAuthHandler inboundJwtAuthHandler = new(inboundJwtAuthProvider);
 
-endpoint http:Listener ep {
-    port: 9008,
-    authProviders:[jwtAuthProvider],
+auth:OutboundBasicAuthProvider outboundBasicAuthProvider = new({
+    username: "admin",
+    password: "admin"
+});
+http:BasicAuthHandler outboundBasicAuthHandler = new(outboundBasicAuthProvider);
 
+http:Client pdp = new("https://localhost:9445", {
+    auth: {
+        authHandler: outboundBasicAuthHandler
+    },
+    secureSocket: {
+        trustStore: {
+            path: "src/order-processing/keys/truststore.p12",
+            password: "wso2carbon"
+        }
+    }
+});
+
+listener http:Listener ep = new(9008, config = {
+    auth: {
+        authHandlers: [inboundJwtAuthHandler]
+    },
     secureSocket: {
         keyStore: {
-            path: "order-processing/keys/keystore.p12",
-            password: "wso2carbon"
-        },
-        trustStore: {
-            path: "order-processing/keys/truststore.p12",
+            path: "src/order-processing/keys/keystore.p12",
             password: "wso2carbon"
         }
     }
-};
+});
 
 @http:ServiceConfig {
-    basePath: "/order-processing",
-    authConfig: {
-        authentication: { enabled: true }
-    }
+    basePath: "/order-processing"
 }
-service<http:Service> orderprocessing bind ep {
-      @http:ResourceConfig {
+service orderprocessing on ep {
+
+    @http:ResourceConfig {
         methods: ["POST"],
         path: "/orders"
     }
-    placeOrder(endpoint caller, http:Request req) {
-        boolean isAuthorized = authz(runtime:getInvocationContext().userPrincipal.username, "orders", "POST");
-        json message;
+    resource function placeOrder(http:Caller caller, http:Request req) {
+        boolean isAuthorized = authz(runtime:getInvocationContext()?.principal?.username ?: "", "orders", "POST");
         http:Response res = new;
+        json message;
         if (isAuthorized){
             message = {"status" : "order created successfully"};
         } else {
             message = {"status" : "user not authorized"};
             res.statusCode = 401;
         }
-        
         res.setPayload(message);
-        _ = caller->respond(res);
+        checkpanic caller->respond(res);
     }
 }
 
-function authz(string user, string res, string action) returns (boolean) {
-        http:Request xacmlReq = new;
-        json authzReq = getAuthzRequest(user);
-
-        log:printInfo(authzReq.toString());
-
-        xacmlReq.setJsonPayload(authzReq, contentType = "application/json");
-        var response = pdp->post("/api/identity/entitlement/decision/pdp",xacmlReq);
-        match response {
-            http:Response resp => { 
-                json jsonResp =  check resp.getJsonPayload();
-                json  result =  jsonResp.Response[0];
-                json  allow =  result.Decision;
-                log:printInfo(allow.toString());
-                if (allow != null && allow.toString().equalsIgnoreCase("permit")) {
-                    return true;
-                } else {
-                    log:printError(jsonResp.toString());
-                    return false;
-                }
-            }
-            error err => { 
-                log:printError("call to the opa endpoint failed.");
-                return false;
-            }
-        } 
+function authz(string user, string res, string action) returns boolean {
+    http:Request xacmlReq = new;
+    json authzReq = getAuthzRequest(user);
+    log:printInfo(authzReq.toString());
+    xacmlReq.setJsonPayload(authzReq);
+    var response = pdp->post("/api/identity/entitlement/decision/pdp", xacmlReq);
+    if (response is http:Response) {
+        json jsonResp = checkpanic response.getJsonPayload();
+        json[] result = <json[]> jsonResp.Response;
+        json allow = checkpanic result[0].Decision;
+        log:printInfo(allow.toString());
+        if (allow != null && stringutils:equalsIgnoreCase(allow.toString(), "permit")) {
+            return true;
+        } else {
+            log:printError(jsonResp.toString());
+            return false;
+        }
+    } else {
+        log:printError("call to the opa endpoint failed.");
+        return false;
+    }
 }
 
 function getAuthzRequest(string subject) returns (json) {
@@ -129,4 +124,3 @@ function getAuthzRequest(string subject) returns (json) {
                 }
             };
 }
-
