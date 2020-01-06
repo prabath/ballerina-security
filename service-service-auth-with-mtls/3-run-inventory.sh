@@ -1,1 +1,1 @@
-ballerina run inventory/inventory_service.bal
+ballerina run inventory
