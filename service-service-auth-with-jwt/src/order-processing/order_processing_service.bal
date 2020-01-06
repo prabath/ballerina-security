@@ -8,12 +8,11 @@ jwt:InboundJwtAuthProvider inboundJwtAuthProvider = new({
     trustStoreConfig: {
         certificateAlias: "wso2carbon",
         trustStore: {
-            path: "src/inventory/keys/truststore.p12",
+            path: "src/order-processing/keys/truststore.p12",
             password: "wso2carbon"
         }
     }
 });
-
 http:BearerAuthHandler inboundJwtAuthHandler = new(inboundJwtAuthProvider);
 
 jwt:OutboundJwtAuthProvider outboundJwtAuthProvider = new;
@@ -46,7 +45,7 @@ listener http:Listener ep = new(9008, config = {
 @http:ServiceConfig {
     basePath: "/order-processing"
 }
-service inventory on ep {
+service orderprocessing on ep {
 
     @http:ResourceConfig {
         methods: ["POST"],
