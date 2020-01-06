@@ -58,7 +58,7 @@ service orderprocessing on ep {
         http:Request invReq = new;
         json invPayload = {"items" :[{"code" : "10001","qty" : 4}]};
         invReq.setJsonPayload(invPayload);
-        var response = httpEndpoint->post("/inventory/items",invReq);
+        var response = httpEndpoint->post("/inventory/items", invReq);
         if (response is http:Response) {
             string log = "response from inventory service " + response.getTextPayload().toString();
             log:printInfo(log);

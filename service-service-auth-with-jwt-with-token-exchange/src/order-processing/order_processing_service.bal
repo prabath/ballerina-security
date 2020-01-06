@@ -80,7 +80,7 @@ service orderprocessing on ep {
         http:Request invReq = new;
         json invPayload = {"items" :[{"code" : "10001","qty" : 4}]};
         invReq.setJsonPayload(invPayload);
-        var response = httpEndpoint->post("/inventory/items",invReq);
+        var response = httpEndpoint->post("/inventory/items", invReq);
         if (response is http:Response) {
             string log = "response from inventory service " + response.getTextPayload().toString();
             log:printInfo(log);
@@ -104,7 +104,7 @@ function exchangeToken(string jwt) {
     string payload = "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=update_items&assertion=" + jwt;
     newReq.setTextPayload(payload, contentType = "application/x-www-form-urlencoded");
 
-    var response = tokenEndpoint->post("/token",newReq);
+    var response = tokenEndpoint->post("/token", newReq);
     if (response is http:Response) {
         json jsonResp = checkpanic response.getJsonPayload();
         json newJWT = checkpanic jsonResp.access_token;

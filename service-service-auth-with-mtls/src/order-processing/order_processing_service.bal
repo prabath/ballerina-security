@@ -70,7 +70,7 @@ service orderprocessing on ep {
         // add a custom header to carry the end-user data.
         invReq.addHeader("authn-user", runtime:getInvocationContext()?.principal?.username ?: "");
         
-        var response = httpEndpoint->post("/inventory/items",invReq);
+        var response = httpEndpoint->post("/inventory/items", invReq);
         if (response is http:Response) {
             string log = "response from inventory service " + response.getTextPayload().toString();
             log:printInfo(log);
@@ -88,5 +88,3 @@ service orderprocessing on ep {
         }
     }
 }
-
-

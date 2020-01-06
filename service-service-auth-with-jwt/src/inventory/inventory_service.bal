@@ -12,7 +12,6 @@ jwt:InboundJwtAuthProvider jwtAuthProvider = new({
         }
     }
 });
-
 http:BearerAuthHandler jwtAuthHandler = new(jwtAuthProvider);
 
 listener http:Listener ep = new(9090, config = {

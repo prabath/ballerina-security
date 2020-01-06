@@ -61,7 +61,7 @@ service orderprocessing on ep {
         boolean isAuthorized = authz(runtime:getInvocationContext()?.principal?.username ?: "", "orders", "POST");
         http:Response res = new;
         json message;
-        if (isAuthorized){
+        if (isAuthorized) {
             message = {"status" : "order created successfully"};
         } else {
             message = {"status" : "user not authorized"};
@@ -95,7 +95,7 @@ function authz(string user, string res, string action) returns boolean {
     }
 }
 
-function getAuthzRequest(string subject) returns (json) {
+function getAuthzRequest(string subject) returns json {
     return  { "Request": { 
                 "Action": {
                     "Attribute": [
