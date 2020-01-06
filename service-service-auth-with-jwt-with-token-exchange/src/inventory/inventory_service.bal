@@ -1,52 +1,47 @@
 import ballerina/http;
-import ballerina/runtime;
-import ballerina/log;
-import ballerina/io;
+import ballerina/jwt;
 
-http:AuthProvider jwtAuthProvider = {
-    scheme:"jwt",
-    issuer:"wso2is",
+jwt:InboundJwtAuthProvider jwtAuthProvider = new({
+    issuer: "wso2is",
     audience: "FlfJYKBD2c925h4lkycqNZlC2l4a",
-    certificateAlias:"wso2carbon",
-    trustStore: {
-        path: "inventory/keys/truststore.p12",
-        password: "wso2carbon"
-    }
-};
-
-endpoint http:Listener ep {
-    port: 9009,
-    authProviders:[jwtAuthProvider],
-
-    secureSocket: {
-        keyStore: {
-            path: "inventory/keys/keystore.p12",
-            password: "wso2carbon"
-        },
+    trustStoreConfig: {
+        certificateAlias: "wso2carbon",
         trustStore: {
-            path: "inventory/keys/truststore.p12",
+            path: "src/inventory/keys/truststore.p12",
             password: "wso2carbon"
         }
     }
-};
+});
+
+http:BearerAuthHandler jwtAuthHandler = new(jwtAuthProvider);
+
+listener http:Listener ep = new(9009, config = {
+    auth: {
+        authHandlers: [jwtAuthHandler]
+    },
+    secureSocket: {
+        keyStore: {
+            path: "src/inventory/keys/keystore.p12",
+            password: "wso2carbon"
+        }
+    }
+});
 
 @http:ServiceConfig {
-    basePath: "/inventory",
-    authConfig: {
-        authentication: { enabled: true }
-    }
+    basePath: "/inventory"
 }
-service<http:Service> inventory bind ep {
+service inventory on ep {
+
     @http:ResourceConfig {
         methods: ["POST"],
         path: "/items",
-        authConfig: {
+        auth: {
             scopes: ["update_items"]
         }
     }
-    updateItems(endpoint caller, http:Request req) {
+    resource function updateItems(http:Caller caller, http:Request req) {
         http:Response res = new;
         res.setPayload({"status" : "items updated in the inventory."});
-        _ = caller->respond(res);
+        checkpanic caller->respond(res);
     }
 }
