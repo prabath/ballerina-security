@@ -1,0 +1,1 @@
+docker run -p 9443:9443 prabath/wso2is-sts
