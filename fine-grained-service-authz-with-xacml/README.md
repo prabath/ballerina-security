@@ -2,7 +2,7 @@
 
 ![alt text](./setup.png "Fine-grained access control with XACML")
 
-* **Step:0** Clone the git repo with the following command. If you are new to Ballerina, please check this out: https://ballerina.io/. Ballerina version: 0.983.0.
+* **Step:0** Clone the git repo with the following command. If you are new to Ballerina, please check this out: https://ballerina.io/. Ballerina version: 1.1.0
 
 ```javascript
 :\> git clone https://github.com/prabath/ballerina-security.git

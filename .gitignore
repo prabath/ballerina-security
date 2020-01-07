@@ -1,0 +1,20 @@
+# IDE files
+.ballerina/
+target/
+.idea/
+.vscode/
+*.iml
+
+# Ballerina
+*.conf
+*.log
+*.lock
+
+# CUSTOM files
+tcp_stream
+*.pcapng
+*.zip
+*.png
+*.jar
+*.jmx
+*.jfr
