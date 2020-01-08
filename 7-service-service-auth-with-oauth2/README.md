@@ -1,5 +1,7 @@
 ## Securing service to service communication over TLS with OAuth2
 
+![alt text](./setup.png "Service to Service Communication with OAuth2")
+
 * **Step:0** Clone the git repo with the following command. If you are new to Ballerina, please check this out: https://ballerina.io/. Ballerina version: 1.1.0
 
 ```javascript
