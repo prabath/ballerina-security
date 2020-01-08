@@ -10,6 +10,7 @@
 
 * Securing Ballerina Microservices with WSO2 Identity Server, JWT, OPA and XACML : https://www.youtube.com/watch?v=DBhylSRkpRg
 
+* How to Write Secure Ballerina Programs : https://ballerina.io/learn/how-to-write-secure-ballerina-code/
 
 ## Microservices Security Resources
 
