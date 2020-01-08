@@ -1,5 +1,7 @@
 ## Securing service with JWT Auth
 
+![alt text](./setup.png "Securing servie with JWT")
+
 * **Step:0** Clone the git repo with the following command. If you are new to Ballerina, please check this out: https://ballerina.io/. Ballerina version: 1.1.0
 
 ```javascript
