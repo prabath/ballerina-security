@@ -1,5 +1,7 @@
 ## Service service communication without authentication
 
+![alt text](./setup.png "Service to service communication")
+
 * **Step:0** Clone the git repo with the following command. If you are new to Ballerina, please check this out: https://ballerina.io/. Ballerina version: 1.1.0
 
 ```javascript
