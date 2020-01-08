@@ -1,4 +1,4 @@
-## Securing service with BasicAuth
+## Securing service with Basic Auth
 
 * **Step:0** Clone the git repo with the following command. If you are new to Ballerina, please check this out: https://ballerina.io/. Ballerina version: 1.1.0
 
@@ -6,17 +6,17 @@
 :\> git clone https://github.com/prabath/ballerina-security.git
 ```
 
-* **Step:1** This example directly uses [Secured Service with Basic Auth](https://ballerina.io/learn/by-example/secured-service-with-basic-auth.html) Ballerina by-example (BBE). To download relevant files and setup the BBE locally, run the following command from the directory **service-auth-with-basicauth**.
+* **Step:1** This example directly uses [Secured Service with Basic Auth](https://ballerina.io/learn/by-example/secured-service-with-basic-auth.html) Ballerina by-example (BBE). To download relevant files and setup the BBE locally, run the following command from the directory **service-auth-with-basic-auth**.
 
 ```javascript
 :\> sh 1-setup-frpm-bbe.sh
 ```
-* **Step:2** To run the Ballerina by-example, run the following command from the directory **service-auth-with-basicauth**. This will start the service on HTTPS port 9090.
+* **Step:2** To run the Ballerina by-example, run the following command from the directory **service-auth-with-basic-auth**. This will start the service on HTTPS port 9090.
 
 ```javascript
 :\> sh 2-run-bbe.sh
 ```
-* **Step:5** Run the following command from the directory **service-auth-with-basicauth** to invoke Ballerina by-example.
+* **Step:5** Run the following command from the directory **service-auth-with-basic-auth** to invoke Ballerina by-example.
 
 ```javascript
 :\> sh 3-call-bbe.sh

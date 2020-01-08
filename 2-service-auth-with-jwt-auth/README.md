@@ -1,6 +1,4 @@
-## Securing service to service communication over TLS with JWT
-
-![alt text](./setup.png "Service to Service Communication Over TLS with JWT")
+## Securing service with JWT Auth
 
 * **Step:0** Clone the git repo with the following command. If you are new to Ballerina, please check this out: https://ballerina.io/. Ballerina version: 1.1.0
 
